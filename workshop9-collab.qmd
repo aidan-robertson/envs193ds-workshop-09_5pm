@@ -5,16 +5,12 @@ editor: visual
 ---
 
 load libraries
-
 ```{r}
 library(tidyverse) # for wrangling and plotting
 library(lterdatasampler) # for data access
 library(ggeffects) # for models
 library(here) # for easy file pathing
 ```
-
-
-
 
 reading in data
 ```{r}
@@ -25,8 +21,17 @@ exploratory vis
 ```{r}
 ggplot(aes(x = latitude, y = size), data = pie_crab) + # set up plot
   geom_point(color = "orange") + # scatterplot and make it orange
-  labs(x = "Latitude", y = "Size(mm)") + # update axes labels
+  labs(x = "Latitude", y = "Size (mm)") + # update axes labels
   theme_minimal() # remove gridlines
          
+```
+writing a model
+```{r}
+crab_model <- lm(size ~ latitude, #formula: response ~ predictor
+                 data = pie_crab) # data from lterdatasampler
+
+# look at diagnostics here
+par(mfrow = c(2, 2)) # plot in diagnostics plot in 2x2 grid
+plot(crab_model) # plotting diagnostics
 ```
 
